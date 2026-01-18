@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reddast Coaching</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Nunito+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --moss: #3C4D3B;
+            --sage: #717C67;
+            --mist: #E8ECDF;
+            --mist-dark: #d8dece;
+            --white: #ffffff;
+            --sunshine: #F39F2D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            font-weight: 300;
+            line-height: 1.7;
+            color: var(--moss);
+            background-color: var(--mist);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--mist);
+            padding: 1.25rem 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid var(--mist-dark);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--sage);
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--moss);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--moss);
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 2rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Hero */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 8rem;
+            background: linear-gradient(135deg, var(--mist) 0%, var(--mist-dark) 100%);
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text {
+            text-align: left;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            line-height: 1.3;
+            color: var(--moss);
+            margin-bottom: 2rem;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .hero-text p {
+            font-size: 1.05rem;
+            color: var(--sage);
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 8px 30px rgba(60, 77, 59, 0.15);
+        }
+
+        .scroll-indicator {
+            display: none;
+        }
+
+        @media (max-width: 900px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+                text-align: center;
+            }
+
+            .hero-text {
+                text-align: center;
+                order: 1;
+            }
+
+            .hero-image {
+                order: 2;
+                height: 350px;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(10px); }
+            60% { transform: translateY(5px); }
+        }
+
+        /* About Section */
+        #about {
+            background: var(--white);
+        }
+
+        .about-intro {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid var(--mist-dark);
+        }
+
+        .about-photo {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center top;
+            margin-bottom: 2rem;
+            border: 4px solid var(--mist);
+            box-shadow: 0 4px 20px rgba(60, 77, 59, 0.15);
+        }
+
+        .about-intro .greeting {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-style: italic;
+            color: var(--moss);
+            margin-bottom: 2rem;
+        }
+
+        .about-intro p {
+            color: var(--sage);
+            font-size: 1.05rem;
+        }
+
+        .story-section {
+            margin-bottom: 3rem;
+        }
+
+        .story-section h2 {
+            font-size: 1.8rem;
+            color: var(--moss);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .story-section p {
+            color: var(--sage);
+            margin-bottom: 1rem;
+        }
+
+        .name-meaning {
+            background: var(--mist);
+            padding: 2.5rem;
+            border-radius: 4px;
+            margin-top: 3rem;
+        }
+
+        .name-meaning h3 {
+            font-size: 1.4rem;
+            color: var(--moss);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .name-meaning p {
+            color: var(--sage);
+        }
+
+        /* Programmes Section */
+        #programmes {
+            background: var(--mist);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--moss);
+            font-style: italic;
+        }
+
+        .programme-card {
+            background: var(--white);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            border-radius: 4px;
+            box-shadow: 0 2px 20px rgba(60, 77, 59, 0.08);
+        }
+
+        .programme-card h3 {
+            font-size: 1.6rem;
+            color: var(--moss);
+            margin-bottom: 1.5rem;
+        }
+
+        .programme-card > p {
+            color: var(--sage);
+            margin-bottom: 2rem;
+        }
+
+        .programme-phases {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .phase {
+            padding-left: 1.5rem;
+            border-left: 2px solid var(--sunshine);
+        }
+
+        .phase h4 {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--sunshine);
+            margin-bottom: 0.5rem;
+        }
+
+        .phase p {
+            color: var(--sage);
+            font-size: 0.95rem;
+        }
+
+        .pricing {
+            background: var(--mist);
+            padding: 1.25rem 1.5rem;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .pricing p {
+            color: var(--moss);
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .coaching-questions {
+            color: var(--sage);
+            margin-top: 1.5rem;
+        }
+
+        .coaching-questions li {
+            margin-bottom: 0.5rem;
+            margin-left: 1.25rem;
+        }
+
+        /* Clients Section */
+        #clients {
+            background: var(--white);
+        }
+
+        .testimonials {
+            display: grid;
+            gap: 2.5rem;
+        }
+
+        .testimonial {
+            padding: 2rem;
+            background: var(--mist);
+            border-radius: 4px;
+        }
+
+        .testimonial-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--moss);
+            margin-bottom: 0.5rem;
+        }
+
+        .testimonial-context {
+            font-size: 0.9rem;
+            color: var(--sage);
+            margin-bottom: 1.25rem;
+            font-style: italic;
+        }
+
+        .testimonial-quote {
+            color: var(--sage);
+            line-height: 1.8;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--moss);
+            color: var(--mist);
+        }
+
+        #contact .container {
+            text-align: center;
+        }
+
+        #contact h2 {
+            font-size: 2rem;
+            color: var(--mist);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        #contact p {
+            color: var(--mist-dark);
+            margin-bottom: 1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #contact .charity-note {
+            font-size: 0.95rem;
+            font-style: italic;
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .email-link {
+            display: inline-block;
+            color: var(--mist);
+            font-size: 1.2rem;
+            text-decoration: none;
+            padding: 1rem 2.5rem;
+            border: 1px solid var(--sage);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            letter-spacing: 0.02em;
+        }
+
+        .email-link:hover {
+            background: var(--sunshine);
+            color: var(--moss);
+            border-color: var(--sunshine);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--moss);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--sage);
+        }
+
+        .footer-logo {
+            height: 35px;
+            width: auto;
+            margin-bottom: 1rem;
+        }
+
+        footer p {
+            color: var(--sage);
+            font-size: 0.85rem;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--mist);
+                flex-direction: column;
+                padding: 1.5rem;
+                gap: 1.25rem;
+                border-bottom: 1px solid var(--mist-dark);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .programme-card {
+                padding: 2rem;
+            }
+
+            .testimonial {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="#home" class="logo"><img src="assets/Reddast_Colour_Long.png" alt="Reddast Coaching"></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#programmes">Programmes</a></li>
+                <li><a href="#clients">Client Stories</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-toggle" onclick="toggleNav()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <section id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Did you fall into your career and now feel stuck? It's time to design a fulfilling career.</h1>
+                <p>We often launch our careers by taking the first opportunity that comes our way. Success follows and you progress within your company, industry or profession. Yet deep-down you feel something isn't quite right and eventually you find yourself unhappy, stuck and dissatisfied. Career coaching can reconnect you to your values and strengths, generate new ideas and opportunities, and put you back on a path to a fulfilling career.</p>
+            </div>
+            <img src="assets/hero-image.jpg" alt="Person looking optimistic about their future" class="hero-image">
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <div class="about-intro">
+                <img src="assets/jenny-styled.jpg" alt="Jenny" class="about-photo">
+                <p class="greeting">Hello, I'm Jenny.</p>
+                <p>I'm an experienced career coach, licensed by Career Counselling Services, and have had a successful leadership career in tech. I now have a rewarding portfolio career combining consulting, coaching, volunteering and study.</p>
+                <p style="margin-top: 1rem;">I use career coaching techniques, design thinking and lived experience to help you reconcile your position, articulate your work philosophy and strengths, and find what energises and engages you. Together we will generate career options, map your career direction and focus on the action needed to uncover and explore opportunities.</p>
+                <p style="margin-top: 1rem;">Whether you decide to grow in your current role, pivot to a new industry or profession, pursue a passion project, start your own business, engage in your local community, or something else … the opportunities are endless, yet always unique to you.</p>
+            </div>
+
+            <div class="story-section">
+                <h2>My story</h2>
+                <p>I've had a varied career as a tech leader across global corporates and start-ups. I've lived in the US and Spain and have a successful consulting company in the UK.</p>
+                <p>And yet I never really had a clear view of why I did my work each day. I moved from one job to another as opportunities popped up without much thought; I was fine just so long as I liked the people I worked with, was kept busy and could pay the bills.</p>
+                <p>Then life shifted, I was widowed unexpectedly and given a harsh reminder that life is fragile and our time here is precious.</p>
+                <p>I realised I wanted to be more purposeful in how I spent my time. I didn't want to return to an all-consuming role. Instead, I looked for opportunities aligned to my values that would use my strengths in ways I found energising and engaging. Through career counselling I gained clarity and figured out my direction.</p>
+                <p>Professional training as a licensed career counsellor and establishing a coaching practice followed; alongside post-graduate studies in psychology. I also reconnected with my local community through becoming an adviser at Citizens Advice and an ambassador for our local hospice. I've been able to prioritise my family and friends, build a coaching business, contribute locally and continue consulting.</p>
+                <p>I set up Reddast Coaching to empower you to reclaim your life and find a fulfilling career.</p>
+            </div>
+
+            <div class="name-meaning">
+                <h3>What's in the name?</h3>
+                <p>The word Reddast comes from the Icelandic saying "Þetta Reddast", meaning that everything will work out fine. The Icelandic people have an uplifting combination of optimism, pragmatism and stoicism. Living in an unpredictable landscape, they have an unrelentingly belief that no matter how big a problem, the solution will always present itself. It's an ethos that runs through how we work with you at Reddast Coaching.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="programmes">
+        <div class="container">
+            <div class="section-title">
+                <h2>Programmes</h2>
+            </div>
+
+            <div class="programme-card">
+                <h3>Career Deep Dive</h3>
+                <p>A structured framework to kick-start your career journey.</p>
+                
+                <div class="programme-phases">
+                    <div class="phase">
+                        <h4>Exploring</h4>
+                        <p>A space to reflect on your career to date, your work values, interests, strengths and motivators. We'll use exercises and questionnaires to explore what makes you thrive and help you gain deeper insight.</p>
+                    </div>
+                    <div class="phase">
+                        <h4>Clarifying</h4>
+                        <p>A time to bring together the insights gained through exploration into a picture of what key elements will lead to a fulfilling career for you.</p>
+                    </div>
+                    <div class="phase">
+                        <h4>Visioning</h4>
+                        <p>Opening up your mind and imagining possible futures that could develop into possible career directions.</p>
+                    </div>
+                    <div class="phase">
+                        <h4>Action</h4>
+                        <p>A realistic assessment of the different options - identifying obstacles and how to overcome them. Planning practical next steps and sharing resources to enable you to research, network and develop opportunities.</p>
+                    </div>
+                </div>
+
+                <div class="pricing">
+                    <p>£120 per hour · 6 sessions for £600</p>
+                </div>
+            </div>
+
+            <div class="programme-card">
+                <h3>One-to-One Coaching</h3>
+                <p>I also offer one-to-one career coaching for people at all stages of their careers. My approach combines career coaching and design thinking, alongside lived experience. So, if you're asking yourself any of the questions below, I'd love to work with you.</p>
+                
+                <ul class="coaching-questions">
+                    <li>How can I make sense of my career so far?</li>
+                    <li>What do I want from a job and my career?</li>
+                    <li>How do I become more motivated?</li>
+                    <li>How do I achieve my career goals in my current role?</li>
+                    <li>What jobs will suit me?</li>
+                    <li>What job or career do I want to do?</li>
+                    <li>Am I good enough for the job or career I want?</li>
+                    <li>How do I decide between career options?</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="clients">
+        <div class="container">
+            <div class="section-title">
+                <h2>Client Stories</h2>
+            </div>
+
+            <div class="testimonials">
+                <div class="testimonial">
+                    <p class="testimonial-name">Nana</p>
+                    <p class="testimonial-context">Nana wanted to move into a new profession whilst using a gap between jobs to take stock of her career.</p>
+                    <p class="testimonial-quote">"Working with Jenny has been an exceptional experience. In a short time, she has brought clarity to my career path, helping me understand what truly matters and how to build a fulfilling career around it. Each session leaves me feeling empowered and focused, thanks to her invaluable feedback and insightful exercises. Jenny's ability to help me think outside the box and her keen attention to detail are unparalleled. She has a unique talent for uncovering hidden or overlooked answers, which has been crucial to my growth. Jenny's warmth and passion for helping others achieve their best shine through in every interaction."</p>
+                </div>
+
+                <div class="testimonial">
+                    <p class="testimonial-name">D.R.</p>
+                    <p class="testimonial-context">D was unsure whether to continue in her current area of medical research or pivot to a completely different area where she felt she could make a bigger impact. She had always followed the path expected of her by those around her and didn't know how to decide which direction to take.</p>
+                    <p class="testimonial-quote">"Jenny is warm, friendly, empathetic, an exceptional listener and coach. She took a genuine interest in my journey and helped me gain clarity around my values, aspirations, and goals—both in my career and personal life. Jenny asks you great questions to make sure you don't hold yourself back from making the right decisions. Her guidance and advice have been very helpful, and I am grateful for her support during this process. I would highly recommend Jenny to anyone seeking direction in their career path."</p>
+                </div>
+
+                <div class="testimonial">
+                    <p class="testimonial-name">Emma</p>
+                    <p class="testimonial-context">Emma had been in advertising since university, she was increasingly demotivated and didn't know why.</p>
+                    <p class="testimonial-quote">"Over 6 sessions, Jenny helped me move away from total uncertainty paralysis about my long-term career direction, to having a clearer perspective on my options and timelines, while also helping me strategise short-term regarding my current role. Jenny is a great combination of down-to-earth, empathetic and practical. Unlike other career coaches I have worked with, Jenny didn't try to put me in a box or shoehorn me into a fixed curriculum: she met me where I was, and adapted her approach to give me practical, usable advice, while also providing structure and truly being someone on your team. She's also really responsive, exchanging ideas and sharing useful resources via email above and beyond the sessions themselves. I always come out of her sessions feeling better than I did going in. She makes you realise problems are solvable."</p>
+                </div>
+
+                <div class="testimonial">
+                    <p class="testimonial-name">Nadia</p>
+                    <p class="testimonial-context">Nadia no longer wanted to stay in her current job and was looking to launch a new business.</p>
+                    <p class="testimonial-quote">"I love working with Jenny, she constantly makes me think outside the box, asks me the most insightful questions and has a brilliant sense of humour. Jenny has been a trusted companion on this journey with me and has helped me to find clarity and direction. Thanks to her, I am feeling inspired, confident and excited for my future."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Book an introductory call</h2>
+            <p>Email to book a free 20-30 minute introductory conversation. It's a chance to get to know each other, find out more about coaching and see if you'd like to work together.</p>
+            <p class="charity-note">As a thank you for your interest, we'll also make a donation to a charity of your choice following the call.</p>
+            <a href="mailto:jenny@reddastcoaching.com" class="email-link">jenny@reddastcoaching.com</a>
+        </div>
+    </section>
+
+    <footer>
+        <img src="assets/Reddast_White_Long.png" alt="Reddast Coaching" class="footer-logo">
+        <p>© 2025 Reddast Coaching</p>
+    </footer>
+
+    <script>
+        function toggleNav() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Close mobile nav when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
